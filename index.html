@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Captcha</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            background: #7b5cff;
+            padding-top: 100px;
+        }
+
+        .box {
+            background: white;
+            width: 250px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .captcha {
+            border: 2px solid gray;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .text {
+            letter-spacing: 5px;
+            font-size: 20px;
+        }
+
+        input {
+            padding: 8px;
+            width: 90%;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 8px;
+            background: #7b5cff;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+
+<body onload="generate()">
+
+<div class="box">
+    <h3>Captcha</h3>
+
+    <div class="captcha">
+        <span class="text" id="abc"></span>
+        <button onclick="generate()">↻</button>
+    </div>
+
+    <input type="text" placeholder="Enter captcha" id="res" onclick="this.value=''">
+
+    <button style="width:100%" onclick="check()">Submit</button>
+    <p id="result"></p>
+</div>
+<script>
+let Captcha="";
+
+function generate()
+{
+    let ch="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    Captcha="";
+    for (let i=0;i<6;i++)
+    {
+        Captcha += ch[Math.floor(Math.random()*ch.length)];
+    }
+
+    document.getElementById("abc").innerText=Captcha;
+}
+
+function check()
+{
+    let user = document.getElementById("res").value;
+
+    if(user == Captcha)
+    {
+        document.getElementById("result").innerText="correct";
+    }
+    else{
+        document.getElementById("result").innerText="incorrect";
+    }
+}
+</script>
+</body>
+</html>
